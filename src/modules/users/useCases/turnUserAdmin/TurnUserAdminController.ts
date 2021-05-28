@@ -11,7 +11,7 @@ class TurnUserAdminController {
         this.turnUserAdminUseCase.execute({user_id});
         return response.status(201).send();
     }catch(e){
-        return response.status(400).json(e.message);
+        return response.status(404).json(e.message);
     }
         
   }

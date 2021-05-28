@@ -8,20 +8,20 @@ interface IRequest {
 class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  execute({ user_id }: IRequest): User[] {
-   const user = this.usersRepository.findById(user_id);
-   if(!user){
-        throw new Error (" User does not exists!!" );
+    execute({ user_id }: IRequest): User[] {
+        console.log("usuari recebido ", user_id);
+        const user = this.usersRepository.findById(user_id);
         
-    }else {
-        if(user.admin === false){
-            throw new Error (" User does not have access !!");
+        if(!user){
+            throw new Error (" User does not exists!!" );
+            
+            }else {
+            if(user.admin === false){
+                throw new Error (" User does not have access !!");
+            }
+            const users = this.usersRepository.list();
+            return users
         }
-
-        const users = this.usersRepository.list();
-        return users
-    }   
   }
 }
-
 export { ListAllUsersUseCase };
